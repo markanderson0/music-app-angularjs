@@ -1,0 +1,131 @@
+<uib-tabset>
+
+  <uib-tab heading="Videos" ng-click="video.getShowVideos()">
+    <div class="row" id="tab-videos" ng-repeat="playlistVideo in video.showVideos">
+      <label class="video-title">Uploaded By <a ui-sref="profile.profile.user({user: playlistVideo.user})">{{playlistVideo.user}}</a>
+        <label ng-if="playlistVideo.playlistId === video.playlistId"> - Currently Playing</label>
+      </label>  
+      <slick infinite="false" slides-to-show="5" slides-to-scroll="1" responsive="video.responsive" arrows="true" mobileFirst="true">
+        <div ng-repeat="vid in playlistVideo.video track by $index">
+          <div class="video-tile">
+            <img class="video-pic" ng-src="{{vid.image}}">
+            <span ui-sref="video({name: video.artistName, playlist: playlistVideo.playlistId, show: video.showId, id: vid.id})">
+              <h5 ng-repeat="song in vid.songs track by $index">{{song}}</h5>
+            </span>
+          </div>
+          <div id="tab-playlist-playing">
+            <span ng-if="vid.id === video.videoId">
+              <h5>Now Playing</h5>
+            </span>
+          </div>
+          <h5 class="video-rating">
+            <span><i class="fa fa-volume-off" aria-hidden="true"></i>{{vid.audio}} 
+                  <i class="fa fa-video-camera" aria-hidden="true"></i>{{vid.video}}
+            </span>
+          </h5>
+          <h5 class="video-time"><span>{{vid.time}}</span></h5>
+          <h5 class="video-views">
+            <span>{{ vid.views}} <i class="fa fa-eye" aria-hidden="true"></i></span>
+          </h5>
+          <h5 class="video-songs" ui-sref="video({name: video.artistName, playlist: playlistVideo.playlistId, show: video.showId, id: vid.id})"><a title="{{vid.songsString}}" ui-sref="video({name: video.artistName, playlist: playlistVideo.playlistId, show: video.showId, id: vid.id})">{{vid.songsString}}</a></h5>
+        </div>
+      </slick>
+    </div>
+    <div class="clearfix bottom-border"> 
+      <label class="artist-sub-link" ui-sref="artist.videos({name: video.artistName})">more videos <i class="ion-arrow-right-b"></i></label>
+    </div>
+  </uib-tab>
+
+  <uib-tab heading="Tickets" ng-click="video.getArtistTickets(video.artistName)">
+    <div class="" class="artist-table" ng-show="video.hasTickets">
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <tr class="table-header">
+            <th id="venue-header">Venue</th>
+            <th id="date-header">Date</th>
+            <th id="ticket-header">Tickets</th>
+          </tr>
+          <tr class="table-data" ng-repeat="ticket in video.tickets">
+            <td class="venue-data">{{ticket.venue}}</br>{{ticket.city}}, {{ticket.state}} {{ticket.country}}</td>
+            <td id="date-data">{{ticket.date}}</td>
+            <td class="ticket-data"><button class="btn btn-default" ng-click="video.openLink(ticket.url)">Get Tickets</button></td>
+          </tr>
+        </table>     
+      </div>
+    </div>
+    <div class="clearfix bottom-border" ng-show="!video.hasTickets"> 
+      <label class="">No tickets available.</label>
+    </div>  
+  </uib-tab>
+
+  <uib-tab heading="Merch" ng-click="video.getArtistMerch(video.artistName)">
+    <div class="artist-merch-div" ng-show="video.hasMerch">
+      <div class="col-md-3 col-sm-6 col-xs-6 image" ng-repeat="merch in video.merch" ui-sref="merch.product({label: video.artistName, id: merch.id})">
+        <img class="merch-event-tile" ng-src="{{merch.pic}}">
+        <h4 class="artist-merch-price"><span>{{merch.price | currency}}</span></h4>
+        <h6 class="artist-merch-name"><span>{{merch.name}}</span></h6>
+      </div>        
+    </div>
+    <div class="clearfix bottom-border" ng-show="video.hasMerch">
+      <label class="artist-sub-link" ui-sref="merch.search({query: video.artistName})">more merch <i class="ion-arrow-right-b"></i></label>
+    </div>    
+    <div class="clearfix bottom-border" ng-show="!video.hasMerch">
+      <label class="artist-sub-link">No merch available.</label>
+    </div>          
+  </uib-tab>
+
+  <uib-tab heading="Albums" ng-click="video.getArtistAlbums(video.artistName)">
+    <div class="artist-album-div" ng-show="video.hasAlbums">
+      <div class="col-md-3 col-sm-6 col-xs-6 image" ng-repeat="album in video.artistAlbums">
+        <img class="merch-event-tile" ng-src="{{album.pic}}">
+        <h6 class="artist-merch-name"><span>{{album.name}}</span></h6>
+      </div>        
+    </div>
+    <div class="clearfix bottom-border" ng-show="video.hasAlbums">
+      <label class="artist-sub-link" ui-sref="artist.albums({name: video.artistName})" ng-click="">more albums <i class="ion-arrow-right-b"></i></label>
+    </div>
+    <div class="clearfix bottom-border" ng-show="!video.hasAlbums">
+      <label class="artist-sub-link">No albums available.</label>
+    </div>
+  </uib-tab>
+
+  <uib-tab heading="Previous Shows" ng-click="video.getArtistPreviousShows(video.artistName)">
+    <div class="artist-table" ng-show="video.hasShows">
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead>
+            <tr class="table-header">
+              <th id="artist-venue-header">Venue</th>
+              <th id="venue-header">City</th>
+              <th id="venue-header">Tour</th>
+              <th id="date-header">Date</th>
+              <th id="date-header">Setlist</th>
+            </tr>
+          </thead>
+          <tbody> 
+            <tr class="table-data" ng-repeat-start="shows in video.artistShows" ng-click="show.isCollapsed=!show.isCollapsed">
+              <td class="venue-data">{{shows.venue}}</td>
+              <td class="city-data">{{shows.city}}, {{shows.state}} {{shows.country}}
+              <td class="city-data">{{shows.tour}}</td>
+              <td id="date-data">{{shows.date}}</td>
+              <td class="setlist-data">Setlist</td>
+            </tr>
+            <tr ng-if="show.isCollapsed" ng-repeat-end="">
+              <td class="artist-setlist" colspan="5">
+                <ol>
+                  <li ng-repeat="song in shows.songs track by $index">{{song}}</li>
+                </ol>
+              </td>
+            </tr>
+          </tbody>  
+        </table>     
+      </div>
+    </div>
+    <uib-pagination ng-show="video.hasShows" total-items="video.totalItems" ng-model="video.currentPage" max-size="video.maxSize" items-per-page="video.itemsPerPage" class="pagination-md artist-shows-pagination" ng-change="video.pageChange(video.currentPage)" boundary-links="true" rotate="false"></uib-pagination>
+    <div class="clearfix bottom-border" ng-show="!video.hasShows"> 
+      <label class="">No previous shows available.</label>
+    </div>  
+  </uib-tab>  
+
+
+</uib-tabset>

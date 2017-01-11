@@ -1,0 +1,26 @@
+<!-- SEARCH RESULTS -->
+<div class="row merch-search-options">
+  <div class="col-sm-4">
+		<h2 class="search-label">{{merchList.category}}</h2>
+	</div>
+	<div class="col-sm-8">
+		<div id="merch-search-displays">
+			<button class="btn btn-default" ng-show="merchList.apparelPage" ng-click="merchList.filterResults('Mens')">Mens</button>
+			<button class="btn btn-default" ng-show="merchList.apparelPage" ng-click="merchList.filterResults('Womens')">Womens</button>
+			<button class="btn btn-default" ng-show="merchList.musicPage" ng-click="merchList.filterResults('CDs')">CDs</button>
+			<button class="btn btn-default" ng-show="merchList.musicPage" ng-click="merchList.filterResults('Vinyl')">Vinyl</button>
+  			<label>Sort By: </label>
+        <select class="form-control merch-sort" placeholder="Best Match" ng-model="merchList.merchSort" ng-options="choice as choice for (idx, choice) in merchList.merchSortOptions.split(',')" ng-change="merchList.sortResults()">
+        </select>
+  	</div>	
+	</div>
+</div>
+<!-- LIST VIEW -->
+<div class="row row-container" id="merch-items">
+	<div class="col-lg-2 col-md-3 col-sm-4 col-xs-6 image" ng-repeat="item in merchList.merch" ng-click="merchList.setMerchItem(item.name, item.price, item.url, item.pic)" ui-sref="merch.product({id: item.id})">
+		<img class="merch-event-tile" ng-src="{{item.pic}}">
+		<h4 class="merch-price"><span>{{item.price | currency}}</span></h4>
+		<h5 class="merch-name"><span>{{item.name}}</span></h5>
+	</div>				
+</div>	
+<button class="btn btn-default" id="load-button" ng-click="merchList.getMoreMerch()">Load More Results</button>

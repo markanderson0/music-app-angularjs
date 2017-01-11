@@ -1,0 +1,42 @@
+#ticket-cat-artist{
+	padding: 10px;
+	vertical-align: middle;
+	white-space: pre-line;
+	border-bottom: $border;
+}
+
+#ticket-cat-find{
+	text-align: right;
+	vertical-align: middle;
+	border-bottom: $border;
+	button{
+		white-space: pre-line;
+	}
+}
+
+#load-button{
+	width: 90%;
+	margin-left: 5%;
+	margin-bottom: 15px;
+}
+
+@media (min-width: 768px){
+	#cat-table{
+		width: 90%;
+		margin: 20px auto;
+		padding-bottom: 15px;
+		border-top: $border;
+		border-bottom: $border;
+		overflow-x: auto;
+	}
+}
+
+@media (max-width: 768px) and (min-width: 480px){
+	#cat-table{
+	}
+}
+
+@media (max-width: 480px) and (min-width: 0px){
+	#cat-table{
+	}
+}

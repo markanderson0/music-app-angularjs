@@ -1,0 +1,35 @@
+<!-- SEARCH RESULTS -->
+<div class="row" id="tickets-search-options">
+  <div class="col-sm-6">
+		<h2 class="search-label">{{ticketsSearch.search}} Tickets</h2>
+	</div>
+	<div class="col-sm-6">
+		<div id="tickets-search-displays">
+			<button class="btn btn-default" ng-click="ticketsSearch.openList()">List View</button>
+			<button class="btn btn-default" ng-click="ticketsSearch.openMap()">Map View</button>
+  	</div>	
+	</div>
+</div>
+<!-- LIST VIEW -->
+<div id="search-table" ng-show="ticketsSearch.showList">
+	<div class="table-responsive">
+		<table class="table table-hover">
+			<tr class="table-header">
+				<th id="artist-header">Artist</th>
+				<th id="date-header">Date</th>
+				<th id="venue-header">Venue</th>
+				<th id="ticket-header">Tickets</th>
+			</tr>
+			<tr class="table-data" ng-repeat="ticket in ticketsSearch.tickets">
+				<td id="name-data">{{ticket.name}}</td>
+				<td id="date-data">{{ticket.date}}</td>
+				<td id="venue-data">{{ticket.venue}}</br>{{ticket.city}}, {{ticket.state}} {{ticket.country}}</td>
+				<td id="ticket-data"><button class="btn btn-default" ng-click="ticketsSearch.openLink(ticket.url)">Get Tickets</button></td>
+			</tr>
+		</table>		 
+	</div>
+</div>
+<!-- MAP VIEW -->
+<div id="search-table" ng-show="ticketsSearch.showMap">
+	<div id="google-maps"></div>
+</div>	

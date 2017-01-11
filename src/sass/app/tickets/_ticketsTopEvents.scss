@@ -1,0 +1,54 @@
+.event-tile{
+	width: 100%;
+	height: 170px;
+	padding-bottom: 15px;
+}
+
+.event-name{
+	position: absolute;
+	top: 60%;
+	width: 100%;
+}
+
+.event-name span{
+	@include tile-span();;
+}
+
+@media (min-width: 768px){
+	.top-events-label{
+		width: 90%;
+		margin: 10px auto;
+		margin-left: 5%;
+		border-bottom: $border;
+		text-align: center;
+	}
+
+	.top-events{
+    width: 90%;
+    margin: 0px auto;
+  }
+}
+
+@media (max-width: 768px) and (min-width: 480px){
+	.top-events-label{
+		margin: 10px auto;
+		border-bottom: $border;
+		text-align: center;
+	}
+
+	.top-events{
+    margin-top: 20px;
+  }
+}
+
+@media (max-width: 480px) and (min-width: 0px){
+	.top-events-label{
+		margin: 10px auto;
+		border-bottom: $border;
+		text-align: center;
+	}
+
+	.top-events{
+    margin-top: 15px;
+  }
+}

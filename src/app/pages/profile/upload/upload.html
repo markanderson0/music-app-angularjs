@@ -1,0 +1,143 @@
+<right-sidebar>
+</right-sidebar>
+
+<div panel panel-class="" ng-class="{'panel-page' : expanded}">
+  <div class="panel-content col-lg-12">
+      <div class="row row-container">
+        <label class="control-label heading-label">Upload</label>
+      </div>
+
+    <div class="row row-container">
+      <uib-tabset>
+        <uib-tab heading="Upload" class="upload-tab" ui-sref="profile.upload" active="upload.upload">
+        	<form role="form" name="uploadForm" ng-submit="upload.submitVideo()" novalidate>
+            <div class="row">
+             		<!-- SELECT A VIDEO -->
+        			<div class="col-md-3">
+                <div class="form-group clearfix" ng-class="{ 'has-error' : uploadForm.file.$invalid && upload.videoSubmitted}">
+                  <label for="inputUsername" class="control-label">Select a Video</label>
+                  <div class="input-group">
+        	  				<input class="form-control" name="file" ng-model="upload.file.name" id="video-path" placeholder="Select a File" value="{{upload.file.name}}" disabled="true" required>
+        	  				<span class="input-group-btn">
+        	  					<button type="file" class="btn btn-default" ngf-select="upload.uploadFiles($file, $invalidFiles)" accept="video/*" ngf-max-height="1000" ngf-max-size="1MB">Browse</button>
+        	  				</span>	
+        	        </div>    
+        	  			<div ng-show="upload.videoSubmitted">
+                    <p ng-show="uploadForm.file.$error.required" class="help-block">Add a File.</p>
+                  </div> 
+                </div>  
+              </div>
+                	<!-- SELECT AN ARTIST -->
+            	<div class="col-md-3">
+                <div class="form-group clearfix" ng-class="{ 'has-error' : uploadForm.artist.$invalid && upload.videoSubmitted}">
+                  <label for="inputArtist" class="control-label">Select an Artist</label>
+                  <div class="input-group">
+        				    <input type="text" name="artist" ng-model="upload.artist" placeholder="Select an Artist" class="form-control"  ng-model-options="upload.modelOptions" ng-change="upload.artistChange(upload.artist)" required>
+                    <div ng-show="upload.videoSubmitted">
+                      <p ng-show="uploadForm.artist.$error.required" class="help-block">Enter an Artists Name.</p>
+                    </div>     
+                  </div>
+                </div>  
+            	</div>
+            	<!-- SELECT A YEAR -->
+            	<div class="col-md-3">
+                <div class="form-group clearfix" ng-class="{ 'has-error' : uploadForm.eventYear.$invalid && upload.videoSubmitted}">
+                  <label for="inputYear" class="control-label">Select Year of Show</label>
+                  <div class="input-group">
+        				    <input type="text" name="eventYear" ng-model="upload.eventYear" placeholder="Select Year of Show"  class="form-control" ng-change="upload.getEvent(upload.eventYear)" required>
+        				    <div ng-show="upload.videoSubmitted">
+                      <p ng-show="uploadForm.eventYear.$error.required" class="help-block">Enter an the year of the show.</p>
+                    </div>  
+                  </div>    
+                </div>  
+            	</div>
+            	<!-- SELECT A SHOW -->
+            	<div class="col-md-3">
+                <div class="form-group clearfix" ng-class="{ 'has-error' : uploadForm.selectedEvent.$invalid && upload.videoSubmitted}">
+                  <label for="inputShow" class="control-label">Select a Show</label>
+                  <div class="input-group">
+                    <select class="form-control" name="selectedEvent" title="Select a Show" placeholder="Select a Show" ng-model="upload.selectedEvent" ng-options='event.id as (event.date + ", " + event.venue) for event in upload.events' ng-change="upload.getSongs(upload.selectedEvent)" required><option selected disabled>Choose one</option></select>
+                    <div ng-show="upload.videoSubmitted">
+                      <p ng-show="uploadForm.selectedEvent.$error.required" class="help-block">Pick a show.</p>
+                    </div>  
+                  </div>    
+                </div>  
+            	</div>
+            </div>
+            <div class="row">	
+            	<!-- SELECT SONGS -->
+            	<div class="col-md-3">
+                <div class="form-group clearfix" ng-class="{ 'has-error' : uploadForm.selectedSong.$invalid && upload.videoSubmitted}">
+                  <label for="inputSongs" class="control-label">Select Songs</label>
+                  <div class="input-group">
+                    <multiselect class="btn-group dropdown" data-multiple="true" title="Select Songs" ms-header="Select Songs in Video" placeholder="Select Songs" name="selectedSong" ng-model="upload.selectedSong" scroll-after-rows="7" options="song for song in upload.songs" ng-change="upload.addSong(upload.selectedSong)"></multiselect>
+                    <div ng-show="upload.videoSubmitted">
+                      <p ng-show="uploadForm.selectedSong.$error.required" class="help-block">Select the songs that are in the video.</p>
+                    </div> 
+                  </div>    
+                </div>  
+            	</div>
+            	<!-- SELECTED SONGS -->
+            	<div class="col-md-6">
+                <div class="form-group clearfix" ng-class="{ 'has-error' : uploadForm.selected.$invalid && upload.videoSubmitted}">
+                  <label for="inputSelectedSongs" class="control-label">Selected Songs</label>
+                  <div class="input-group" ng-trim="false">
+        				    <textarea class="form-control" name="selected" ng-model="upload.selected" id="song-selection" type="text" placeholder="Selected Songs" ng-trim="false" disabled="true" ng-trim="false" required>{{upload.getSelectedSongs()}}</textarea>
+        				    <div ng-show="upload.videoSubmitted">
+                      <p ng-show="uploadForm.selected.$error.required" class="help-block">Select the songs that are in the video.</p>
+                    </div>  
+                  </div>    
+                </div>  
+            	</div>
+            	<!-- UPLOAD VIDEO -->
+            	<div class="col-md-3">
+                <div class="form-group clearfix">
+                  <label for="inputUpload" class="control-label">Upload Video</label>
+                  	<div class="input-group">
+           			      <button type="submit" class="btn btn-default btn-with-icon" id="upload-btn">
+           				     <i class="fa fa-upload"></i>
+           				     Upload Video
+           			      </button>
+           		      </div>	
+                </div>  
+            	</div>
+            </div>
+          </form>    	   
+        </uib-tab>
+
+        <uib-tab heading="My Uploads" class="upload-tab" ui-sref="profile.upload.uploads" active="upload.uploads">
+          <v-accordion class="vAccordion--default" multiple>
+            <v-pane ng-repeat="artist in upload.videos" expanded="pane.isExpanded">
+              <v-pane-header>{{artist.artistName}}</v-pane-header>
+              <v-pane-content>
+                <div id="profile-videos" ng-repeat="shows in artist.shows" ng-show="upload.uploads">
+                  <label class="video-title">{{shows.show.date}} {{shows.show.venue}} {{shows.show.location}}</label>
+                  <slick infinite="false" slides-to-show="5" slides-to-scroll="1" responsive="upload.responsive" arrows="true" init-onload="false" data="upload.uploads">
+                    <div ng-repeat="vid in shows.show.videos track by $index">
+                      <div class="video-tile" ng-click="upload.openEditVideoModal(vid.songs, vid.id)">
+                        <img class="video-pic" ng-src="{{vid.image}}">
+                        <span><h5 id="edit-video-text">Edit Video</h5></span>
+                      </div>
+                      <h5 class="video-rating">
+                        <span>
+                          <i class="fa fa-volume-off" aria-hidden="true"></i>{{vid.audio}} 
+                          <i class="fa fa-video-camera" aria-hidden="true"></i>{{vid.video}}
+                        </span>
+                      </h5>
+                      <h5 class="video-time"><span>{{vid.time}}</span></h5>
+                      <h5 class="video-views">
+                        <span>{{ vid.views}} <i class="fa fa-eye" aria-hidden="true"></i></span>
+                      </h5>
+                      <h5 class="video-songs"><a title="{{vid.songsString}}" ui-sref="video({name: artist.artistName, playlist: shows.show.playlistId, show: shows.show.id, id: vid.id})">{{vid.songsString}}</a></h5>
+                    </div>
+                  </slick>
+                </div>
+              </v-pane-content>
+            </v-pane>
+          </v-accordion>
+        </uib-tab> 
+      </uib-tabset>
+
+    </div>
+  </div>
+</div>    

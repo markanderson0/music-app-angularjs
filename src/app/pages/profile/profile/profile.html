@@ -1,0 +1,108 @@
+<right-sidebar>
+</right-sidebar>
+
+<div panel panel-class="" ng-class="{'panel-page' : expanded}">
+  <div class="panel-content col-lg-12">
+
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="row row-container banner-container">
+          <img id="banner-pic" ng-src="{{profile.bannerPic}}">
+          <img id="profile-pic" ng-src="{{profile.profilePic}}">     
+          <h3 class="profile-header heading-label" id="title-label">
+            <span>{{profile.userName}}</span>
+          </h3>
+        </div>
+      </div>
+    </div>  
+
+    <div class="row row-container">
+      <uib-tabset>
+        <uib-tab heading="Videos" class="profile-tab"> 
+          <v-accordion class="vAccordion--default" multiple>
+            <v-pane ng-repeat="artist in profile.videos" expanded="pane.isExpanded">
+              <v-pane-header>{{artist.artistName}}</v-pane-header>
+              <v-pane-content>
+                <div id="profile-videos" ng-repeat="shows in artist.shows">
+                  <label class="video-title">{{shows.show.date}} {{shows.show.venue}} {{shows.show.location}}</label>
+                  <slick infinite="false" slides-to-show="5" slides-to-scroll="1" responsive="profile.responsive" arrows="true">
+                    <div ng-repeat="vid in shows.show.videos track by $index">
+                      <div class="video-tile">
+                        <img class="video-pic" ng-src="{{vid.image}}">
+                        <span ui-sref="video({name: artist.artistName, playlist: shows.show.playlistId, show: shows.show.id, id: vid.id})">
+                          <h5 ng-repeat="song in vid.songs track by $index">{{song}}</h5>
+                        </span>
+                      </div>
+                      <h5 class="video-rating">
+                        <span>
+                          <i class="fa fa-volume-off" aria-hidden="true"></i>{{vid.audio}} 
+                          <i class="fa fa-video-camera" aria-hidden="true"></i>{{vid.video}}
+                        </span>
+                      </h5>
+                      <h5 class="video-time">
+                        <span>{{vid.time}}</span>
+                      </h5>
+                      <h5 class="video-views">
+                        <span>{{ vid.views}}<i class="fa fa-eye" aria-hidden="true"></i></span>
+                      </h5>
+                      <h5 class="video-songs">
+                        <a title="{{vid.songsString}}" ui-sref="video({name: artist.artistName, playlist: shows.show.playlistId, show: shows.show.id, id: vid.id})">{{vid.songsString}}</a>
+                      </h5>
+                    </div>
+                  </slick>
+                </div>
+              </v-pane-content>
+            </v-pane>
+          </v-accordion>
+        </uib-tab>
+
+        <uib-tab heading="Following" class="profile-tab" >
+          <div class="row">
+            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-6 image" ng-repeat="artist in profile.artists">
+              <img ui-sref="artist.profile({name: artist.name})" id="following-tile" ng-src="{{artist.picture}}">
+              <h4 id="following-name"><span>{{artist.name}}</span></h4>
+              <div id="following-links">
+                <label ui-sref="artist.profile({name: artist.name})">Profile</label> | 
+                <label ui-sref="artist.videos({name: artist.name})"> Videos </label>
+              </div>  
+            </div>
+          </div>  
+        </uib-tab>
+
+        <uib-tab heading="Favourites" class="profile-tab">
+          <v-accordion class="vAccordion--default" multiple>
+            <v-pane ng-repeat="artist in profile.favourites">
+              <v-pane-header>{{artist.artistName}}</v-pane-header>
+              <v-pane-content>
+                <div class="col-lg-3 col-md-4 col-sm-4 col-xs-6"  id="favourite-videos" ng-repeat="videos in artist.videos" >
+                  <label class="video-title">Uploaded by {{videos.user}}</label>
+                  <div id="favourite-videos-tile" >
+                    <img id="favourite-videos-pic" ng-src="{{videos.image}}">
+                    <span ui-sref="video({name: artist.artistName, playlist: videos.playlistId, show: videos.showId, id: videos.videoId})">
+                      <h5>{{videos.date}}</h5>
+                      <h5>{{videos.location}}</h5>
+                      <h5>{{videos.venue}}</h5>
+                    </span>
+                  </div>
+                  <h5 id="favourite-videos-rating">
+                    <span>
+                      <i class="fa fa-volume-off" aria-hidden="true"></i>{{videos.audio}} 
+                      <i class="fa fa-video-camera" aria-hidden="true"></i>{{videos.video}}
+                    </span>
+                  </h5>
+                  <h5 id="favourite-videos-time"><span>{{videos.time}}</span></h5>
+                  <h5 id="favourite-videos-views">
+                    <span>{{ videos.views}} <i class="fa fa-eye" aria-hidden="true"></i></span>
+                  </h5>
+                  <h5 id="favourite-videos-songs"><a title="{{videos.songsString}}" ui-sref="video({name: artist.artistName, playlist: videos.playlistId, show: videos.showId, id: videos.videoId})">{{videos.songsString}}</a></h5>
+                </div>
+              </v-pane-content>
+            </v-pane>
+          </v-accordion>
+        </uib-tab>
+      </uib-tabset>
+    </div>  
+
+  </div>
+</div>
+

@@ -1,0 +1,26 @@
+<!-- TITLE -->
+<div class="col-sm-12 top-events-label">
+	<h2>Top {{ticketsCategory.category}} Events</h2>
+</div>
+<!-- PICTURES -->
+<div class="top-events">
+	<div class="col-md-3 col-sm-6 col-xs-6 image" ng-repeat="topEvent in ticketsCategory.topEvents" ui-sref="tickets.artist({query: topEvent.name})">
+		<img class="event-tile" ng-src="{{topEvent.image}}">
+		<h4 class="event-name"><span>{{topEvent.name}}</span></h4>
+	</div>	
+</div>	
+<!-- TABLE -->
+<div class="row">
+	<div id="cat-table">
+		<div class="table-responsive">
+			<table class="table table-hover">
+				<tr class="table-data" ng-repeat="artist in ticketsCategory.eventArtists">
+					<td id="ticket-cat-artist">{{artist.name}}</td>		
+					<td id="ticket-cat-artist"></td>
+					<td id="ticket-cat-find"><button class="btn btn-default" ui-sref="tickets.artist({query: artist.name})">Find Tickets</button></td>
+				</tr>
+			</table>		 
+		</div>
+	</div>
+	<button class="btn btn-default" id="load-button" ng-click="ticketsCategory.getMoreResults()">Load More Results</button>	
+</div>

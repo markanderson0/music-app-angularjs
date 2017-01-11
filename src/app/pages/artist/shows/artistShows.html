@@ -1,0 +1,48 @@
+<div class="row">
+  <div class="col-xs-12">
+    <div class="row row-container banner-container">
+      <img id="artist-banner-pic" ng-src="{{artist.bannerPic}}">    
+      <h3 class="artist-header heading-label" id="title-label" ui-sref="artist.profile({name: artist.artistName})">
+        <span>{{artist.artistName}}</span>
+      </h3>
+    </div>
+  </div>
+</div> 
+<div class="row row-container">
+	<label class="video-label">Previous Shows</label>
+</div>
+<div class="row row-container">
+	<div id="artist-shows-table">
+		<div class="table-responsive">
+			<table class="table table-hover">
+				<thead>
+					<tr class="table-header">
+						<th id="artist-venue-header">Venue</th>
+						<th id="venue-header">Location</th>
+						<th id="venue-header">Tour</th>
+						<th id="date-header">Date</th>
+						<th id="date-header">Setlist</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="table-data" ng-repeat-start="shows in artist.artistShows" ng-click="show.isCollapsed=!show.isCollapsed">
+						<td class="venue-data">{{shows.venue}}</td>
+						<td class="city-data">{{shows.city}}, {{shows.state}} {{shows.country}}</td>
+						<td class="city-data">{{shows.tour}}</td>
+						<td id="date-data">{{shows.date}}</td>
+						<td class="setlist-data">Setlist</td>
+					</tr>
+	        <tr ng-if="show.isCollapsed" ng-repeat-end="">
+	          <td class="artist-setlist" colspan="5">
+	          	<ol ng-if="shows.songs.length > 0">
+	          		<li ng-repeat="song in shows.songs track by $index">{{song}}</li>
+	          	</ol>
+	          	<h5 ng-if="shows.songs.length === 0">No Setlist.</h5>
+	          </td>
+	        </tr>
+	      </tbody>  
+			</table>		 
+		</div>
+	</div>
+</div>
+<uib-pagination total-items="artist.totalItems" ng-model="artist.currentPage" max-size="artist.maxSize" items-per-page="artist.itemsPerPage" class="pagination-md artist-shows-pagination" ng-change="artist.pageChange(artist.currentPage)" boundary-links="true" rotate="false"></uib-pagination>

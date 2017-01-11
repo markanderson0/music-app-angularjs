@@ -1,0 +1,22 @@
+
+.panel-group {
+  > .panel {
+    > .panel-heading {
+      padding: 0;
+
+      > h4.panel-title {
+        height: 50px;
+        width: 100%;
+        padding: 0;
+        margin-left: -20px;
+
+        > a {
+          display: block;
+          padding: 15px 22px;
+          width: 100%;
+        }
+      }
+    }
+  }
+
+}

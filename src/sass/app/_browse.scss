@@ -1,0 +1,15 @@
+.browse-event-tile{
+  width: 100%;
+  height: 200px;
+  padding-bottom: 15px;
+}
+
+.browse-name{
+  position: absolute;
+  top: 60%;
+  width: 100%;
+}
+
+.browse-name span{
+  @include tile-span();
+}

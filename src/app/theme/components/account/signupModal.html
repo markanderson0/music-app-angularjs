@@ -1,0 +1,101 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <button type="button" class="close" ng-click="$dismiss()" aria-label="Close">
+      <em class="ion-ios-close-empty sn-link-close"></em>
+    </button>
+    <h4 class="modal-title">Sign Up using your email address, Facebook or Twitter.</h4>
+  </div>
+  <div class="modal-body">               
+    <form class="form-horizontal" role="form" name="userForm" ng-submit="submitForm()" novalidate>
+      <div class="form-group">
+        <ul class="social">
+          <li><button type="button" class="btn btn-default" id="fb-btn"><i class="fa fa-facebook-official" aria-hidden="true"></i> Facebook</button></li>
+          <li><button type="button" class="btn btn-default" id="tw-btn"><i class="fa fa-twitter-square" aria-hidden="true"></i> Twitter</button></li>
+        </ul>
+      </div>
+
+      <!-- USERNAME -->
+      <div class="form-group" ng-class="{ 'has-error' : userForm.username.$invalid &&  submitted}">
+        <input type="text" class="form-control" id="username" placeholder="Username" name="username" ng-model="user.username" ng-minlength="3" ng-maxlength="8" required>
+        <div ng-show="submitted">
+          <p ng-show="userForm.username.$error.required" class="help-block" id="form-modal">Enter a Username.</p>
+          <p ng-show="userForm.username.$error.minlength" class="help-block" id="form-modal">Username is too short.</p>
+          <p ng-show="userForm.username.$error.maxlength" class="help-block" id="form-modal">Username is too long.</p>
+        </div>  
+      </div>
+
+      <!-- EMAIL -->
+      <div class="form-group" ng-class="{ 'has-error' : userForm.email.$invalid && submitted}">
+        <input type="email" class="form-control" id="email" placeholder="Email" name="email" ng-model="user.email" required>
+        <div ng-show="submitted">
+          <p ng-show="userForm.email.$error.required" class="help-block" id="form-modal">Enter an Email.</p>
+          <p ng-show="userForm.email.$invalid && !userForm.email.$error.required" class="help-block" id="form-modal">Enter a valid email.</p>
+        </div> 
+      </div>
+
+      <!-- PASSWORD -->
+      <div class="form-group" ng-class="{ 'has-error' : userForm.password.$invalid && submitted}">
+        <input type="password" class="form-control" id="password" placeholder="Password" name="password" ng-model="user.password" ng-minlength="6" ng-maxlength="20" required>
+        <div ng-show="submitted">
+          <p ng-show="userForm.password.$error.required" class="help-block" id="form-modal">Enter a Password.</p>
+          <p ng-show="userForm.password.$error.minlength" class="help-block" id="form-modal">Password is too short.</p>
+          <p ng-show="userForm.password.$error.maxlength" class="help-block" id="form-modal">Password is too long.</p>
+        </div> 
+      </div>
+
+      <!-- FIRST AND LAST NAME -->
+      <div class="form-group" ng-class="{ 'has-error' : (userForm.firstname.$invalid || userForm.lastname.$invalid) && submitted}">
+        <ul class="names">
+          <li><input type="text" class="form-control" id="firstname" placeholder="First Name" name="firstname" ng-model="user.firstname" required></li>
+          <li><input type="text" class="form-control" id="lastname" placeholder="Last Name" name="lastname" ng-model="user.lastname" required></li>
+        </ul>
+        <div ng-show="submitted">
+          <p ng-show="userForm.firstname.$error.required || userForm.lastname.$error.required" class="help-block" id="form-modal">Enter a Name.</p>
+        </div> 
+      </div>
+
+      <!-- DOB -->
+      <div class="form-group" ng-class="{ 'has-error' : (userForm.day.$invalid || userForm.month.$invalid || userForm.year.$invalid || !validDate) && submitted}">
+        <ul class="uldob">
+          <li><h5 id="doblabel">Date of Birth:</h5></li>
+          <li><input type="number" class="form-control" id="day" placeholder="DD" min="1" max="31" name="day" ng-model="user.day" ng-change="validateDate()" required></li>
+          <li><input type="number" class="form-control" id="month" placeholder="MM" min="1" max="12" name="month" ng-model="user.month" ng-change="validateDate()" required></li>
+          <li><input type="number" class="form-control" id="year" placeholder="YYYY" min="1900" max="2015" name="year" ng-model="user.year" ng-change="validateDate()" required></li>
+        </ul>
+        <div ng-show="submitted">
+          <p ng-show="userForm.day.$pristine || userForm.month.$pristine || userForm.year.$pristine" class="help-block" id="form-modal">Enter a DOB.</p>
+          <p ng-show="!validDate && !(userForm.day.$pristine || userForm.month.$pristine || userForm.year.$pristine) || (userForm.day.$error.max || userForm.month.$error.max || userForm.year.$error.max || userForm.day.$error.min || userForm.month.$error.min || userForm.year.$error.min)" class="help-block" id="form-modal">Invalid Date.</p>
+        </div> 
+      </div>
+
+      <!-- GENDER -->
+      <div class="form-group" ng-class="{ 'has-error' : userForm.gender.$invalid && submitted}">
+        <div class="gender">
+          <h5 id="genlabel">Gender:</h5>
+          <label class="radio-inline"><input type="radio" name="gender" value="Male" ng-model="user.gender" required>Male</label>
+          <label class="radio-inline"><input type="radio" name="gender" value="Female" ng-model="user.gender" required>Female</label>
+        </div>    
+          <div ng-show="submitted">
+            <p ng-show="userForm.gender.$invalid" class="help-block" id="form-modal">Enter a Gender.</p>
+          </div> 
+      </div>
+
+      <!-- TERMS AND CONDITIONS -->
+      <div class="form-group" ng-class="{ 'has-error' : userForm.terms.$invalid && submitted}">
+        <div class="checkbox" id="terms">
+          <label>
+            <input type="checkbox" name="terms" ng-model="user.terms" required> Terms and Conditions
+          </label>
+        </div>
+        <div ng-show="submitted">
+          <p ng-show="userForm.terms.$pristine" class="help-block" id="form-modal">You must agree to the Terms and Conditions to continue.</p>
+        </div> 
+      </div>
+
+      <!-- SUBMIT -->
+      <div class="form-group">
+        <button type="submit" class="btn btn-default" id="signup-submit">Sign Up</button>
+      </div>
+    </form>                
+  </div>
+</div>

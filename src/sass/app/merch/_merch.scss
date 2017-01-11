@@ -1,0 +1,27 @@
+#merch-label{
+	font-size: 25px;
+	color: #7b7b7b;
+	&:hover{
+		cursor: pointer;
+		color: silver;
+	}
+}
+
+#merch-genre-btn{
+	font-size: 15px;
+	color: #333;
+	background: white;
+	background-color: white;
+	border-color: white;
+	&:hover{
+		color: white;
+		background-color: #333;
+	}
+}
+
+.merch-sort{
+	display: inline !important;
+	width: 100px;
+	padding-right: 0px;
+	margin-bottom: 5px;
+}

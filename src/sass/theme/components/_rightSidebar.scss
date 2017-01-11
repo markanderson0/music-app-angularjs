@@ -1,0 +1,60 @@
+
+  .right-sidebar {
+    width: 240px;
+    right: 0;
+    z-index: 904;
+    display: block;
+    min-height: 100%;
+    @include bg-translucent-dark(0.7);
+    height: 100%;
+    position: fixed;
+    padding-top: 0px;
+    overflow-y: auto;
+  }
+
+  a.collapse-right-menu-link.fa {
+    font-size: 20px;
+    cursor: pointer;
+    display: block;
+    text-decoration: none;
+    line-height: 42px;
+    color: black;
+    padding: 0;
+    float: right;
+    position: fixed;
+    right: 245px;
+      &:hover {
+        text-decoration: none;
+        color: $warning;
+      }
+  }
+
+  a.expand-right-menu-link.fa {
+    font-size: 20px;
+    cursor: pointer;
+    display: block;
+    text-decoration: none;
+    line-height: 42px;
+    color: black;
+    padding: 0;
+    float: right;
+    position: fixed;
+    right: 5px;
+    top: 0px;
+      &:hover {
+        text-decoration: none;
+        color: $warning;
+      }
+  }
+
+  .panel-page{
+    margin-right: 230px;
+  }
+
+// @media (min-width: 1199px){
+//     @include right-expanded();
+// }
+
+// @media (max-width: 1199px){
+//     @include right-collapsed();
+// }

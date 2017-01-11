@@ -1,0 +1,180 @@
+.profile-tab{
+	width: 33.3%;
+	text-align: center;
+}
+
+.video-title{
+  width: 100%;
+  border-bottom: $border;
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+}
+
+//#######-FAVOURITES--##########
+#favourite-videos{
+}
+
+#favourite-videos-tile{
+	position: relative;
+}
+
+#favourite-videos-tile span{
+  width: 100%;
+  top: 0%;
+  height: 170px;
+  padding: 35px 0px;
+  cursor: pointer;
+  visibility: hidden;
+  @include video-tile-span();
+  h5{
+    margin-top: 10px;
+    text-align: center;
+  }
+}
+
+#favourite-videos-tile:hover span{
+  overflow-y: scroll;
+  visibility: visible;
+}
+
+#favourite-videos-pic{
+	width: 100%;
+	height: 180px;
+	padding-bottom: 10px;
+}
+
+#favourite-videos-rating {
+  position: absolute;
+  top: 9.5%;
+  width: 100%;
+}
+
+#favourite-videos-rating span {
+  letter-spacing: 4px;
+  padding: 2px;
+  @include video-tile-span();
+}
+
+#favourite-videos-time {
+  position: relative;
+  bottom: 41px;
+  width: 100%;
+}
+
+#favourite-videos-time span {
+  padding: 3px;
+  @include video-tile-span();
+}
+
+#favourite-videos-views {
+  position: relative;
+  bottom: 42px;
+}
+
+#favourite-videos-views span {
+  right: 0%;
+  padding: 3px;
+  @include video-tile-span();
+}
+
+#favourite-videos-songs{
+   @include video-songs-string();
+}
+
+.profile-header span{
+  background-color: $span-background;
+}
+
+@media (min-width: 768px){
+  #profile-pic{
+    border: $border;
+    position: relative;
+    top: -110px;
+    left: 10px;
+    width: 100px;
+    height: 100px;
+  }
+
+  .profile-header{
+    display: inline;
+    position: relative;
+    top: -80px;
+    left: 20px;
+  }
+
+  #profile-videos{
+    width: 90%;
+    margin-left: 5%;
+    margin-top: 10px;
+  }
+
+  .panel-title {
+    font-weight: $font-normal;
+    font-size: 30px;
+    overflow: hidden;
+  }
+}
+
+@media (max-width: 768px) and (min-width: 480px){
+  #profile-pic{
+    border: $border;
+    position: relative;
+    top: -85px;
+    left: 10px;
+    width: 75px;
+    height: 75px;
+  }
+
+  .profile-header{
+    display: inline;
+    position: relative;
+    top: -62px;
+    left: 20px;
+  }
+
+  #profile-videos{
+    width: 88%;
+    margin-left: 6%;
+    margin-top: 10px;
+  }
+
+  .panel-title {
+    font-weight: $font-normal;
+    font-size: 30px;
+    overflow: hidden;
+  }
+}
+
+@media (max-width: 480px) and (min-width: 0px){
+  #profile-pic{
+    border: $border;
+    position: relative;
+    top: -140px;
+    left: 2px;
+    width: 50px;
+    height: 50px;
+  }
+
+  .profile-header{
+    display: inline;
+    position: relative;
+    top: -45px;
+    left: -52px;
+  }
+
+  #profile-videos{
+    width: 76%;
+    margin-left: 12%;
+    margin-top: 10px;
+  }
+
+  .panel-title {
+    font-weight: $font-normal;
+    font-size: 20px;
+    overflow: hidden;
+  }
+
+  #favourite-videos{
+    width: 100%;
+  }
+}

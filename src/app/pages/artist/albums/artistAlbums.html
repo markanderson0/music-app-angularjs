@@ -1,0 +1,30 @@
+<div class="row">
+  <div class="col-xs-12">
+    <div class="row row-container banner-container">
+      <img id="artist-banner-pic" ng-src="{{artist.bannerPic}}">    
+      <h3 class="artist-header heading-label" id="title-label" ui-sref="artist.profile({name: artist.artistName})">
+        <span>{{artist.artistName}}</span>
+      </h3>
+    </div>
+  </div>
+</div> 
+<div class="row row-container">
+	<label class="video-label">Albums</label>
+</div>
+<div class="row row-container" ng-repeat="album in artist.artistAlbums">
+	<div class="col-sm-4 col-xs-12" >
+		<img id="artist-album-pic" ng-src="{{album.cover}}">
+		<h1 id="artist-album-name">{{album.name}}</h1>
+		<h4 id="artist-album-name">{{album.year}}</h4>
+	</div>	
+	<div class="col-sm-8 col-xs-12" class="artist-table">
+		<div class="table-responsive">
+			<table class="table table-hover">
+				<tr class="" ng-repeat="song in album.songs">
+					<td id="artist-album-songs">{{song.trackNum}}.</td>
+					<td id="artist-album-songs">{{song.name}}</td>
+				</tr>
+			</table>		 
+		</div>
+	</div>
+</div>

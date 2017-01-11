@@ -1,0 +1,195 @@
+<div class="main-sidebar" ng-swipe-right="$mainSidebarService.setMenuCollapsed(false)" ng-swipe-left="$mainSidebarService.setMenuCollapsed(true)" ng-mouseleave="hoverElemTop=selectElemTop">
+
+  <a href class="collapse-menu-link fa fa-caret-left" main-sidebar-toggle-menu></a>
+
+  <h1 class="logo-text">Title</h1>   
+
+  <div class="logged-out">  
+    <button type="button" class="btn btn-default" id="sign-up-btn" data-toggle="modal" ng-click="open('app/theme/components/account/signupModal.html', 'md')">Sign Up</button>
+    <button type="button" class="btn btn-default" id="log-in-btn" data-toggle="modal" ng-click="open('app/theme/components/account/loginModal.html', 'md')">Log In</button>
+  </div>  
+
+
+  <!-- Profile Menu -->  
+  <div class="profile-menu">
+    <ul class="profile-sidebar-list">
+      <li ng-repeat="itemProfile in ::profileMenuItems" class="profile-sidebar-list-item"
+          ng-class="::{'with-sub-menu': itemProfile.subProfileMenu}" ui-sref-active="selected">
+
+        <a ng-mouseenter="hoverItem($event, itemProfile)" ui-state="itemProfile.stateRef || ''" ng-href="{{::(itemProfile.fixedHref ? itemProfile.fixedHref: '')}}" ng-if="::!itemProfile.subProfileMenu" class="profile-sidebar-list-link">
+          <img ng-src="{{profilePic}}"><span>{{ ::itemProfile.title }}</span>
+        </a>
+
+        <a ng-mouseenter="hoverItem($event, itemProfile)" ng-if="::itemProfile.subProfileMenu"
+           class="profile-sidebar-list-link" main-ui-sref-toggler="itemProfile.stateRef">
+          <img class="profile-menu-pic" ng-src="{{profilePic}}"><span>{{ ::itemProfile.title }}</span>
+          <b class="fa fa-angle-down" ui-sref-active="fa-angle-up"
+             ng-if="::itemProfile.subProfileMenu"></b>
+        </a>
+
+    <!-- Sub Menu -->
+        <ul ng-if="::itemProfile.subProfileMenu" class="profile-sidebar-sublist"
+            ng-class="{'slide-right': itemProfile.slideRight}"
+            main-ui-sref-toggling-submenu="itemProfile.stateRef">
+          <li ng-repeat="subitemProfile in ::itemProfile.subProfileMenu" ng-class="::{'with-sub-menu': subitemProfile.subProfileMenu}" ui-sref-active="selected" class="profile-sidebar-sublist-item">
+            <a ng-mouseenter="hoverItem($event, itemProfile)" ng-if="::subitemProfile.subProfileMenu" main-ui-sref-toggler="subitemProfile.stateRef" class="profile-sidebar-list-link subitem-submenu-link">
+              <i class="{{ ::subitemProfile.icon }}"></i><span>{{ ::subitemProfile.title }}</span>
+              <b class="fa" ng-class="{'fa-angle-up': subitem.expanded, 'fa-angle-down': !subitem.expanded}"
+                ng-if="::subitemProfile.subProfileMenu"></b>
+            </a>
+            <a ng-mouseenter="hoverItem($event, itemProfile)" target="{{::(subitemProfile.blank ? '_blank' : '_self')}}" ng-if="::!subitemProfile.subProfileMenu"
+               ui-state="subitemProfile.stateRef || ''"
+               ng-href="{{::(subitemProfile.fixedHref ? subitemProfile.fixedHref: '')}}"><i class="{{ ::subitemProfile.icon }}"></i>{{ ::subitemProfile.title}}</a>
+          </li>
+          <li class="profile-sidebar-sublist-item">
+            <a ng-mouseenter="hoverItem($event, itemProfile)" ui-state="itemProfile.stateRef || ''" ng-href="{{::(itemProfile.fixedHref ? itemProfile.fixedHref: '')}}" class="small-sidebar-list-link">
+          <i class="fa fa-sign-out"></i><span> Log Out </span></a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>  
+
+  
+  <!-- Search Bar -->
+  <div class="menusearch">
+     <div class="input-group">
+        <input type="text" class="form-control" id="search-input" placeholder="Search" ng-model="searchTerm">
+        <span class="input-group-btn">
+          <button class="btn btn-default" id="search-btn" type="submit" ui-sref="search({query: searchTerm})">
+              <i class="fa fa-search" id="search-icon"></i>
+          </button>
+        </span>
+      </div><!-- /input-group -->     
+  </div>
+
+
+  <!-- Main Menu -->
+  
+    <ul class="main-sidebar-list">
+      <li ng-repeat="itemMain in ::mainMenuItems" class="main-sidebar-list-item"
+          ng-class="::{'with-sub-menu': itemMain.subMainMenu}" ui-sref-active="selected">
+
+        <a ng-mouseenter="hoverItem($event, itemMain)" ui-state="itemMain.stateRef || ''" ng-href="{{::(itemMain.fixedHref ? itemMain.fixedHref: '')}}" ng-if="::!itemMain.subMainMenu" class="main-sidebar-list-link">
+          <i class="{{ ::itemMain.icon }}"></i><span>{{ ::itemMain.title }}</span>
+        </a>
+
+        <a ng-mouseenter="hoverItem($event, itemMain)" ng-if="::itemMain.subMainMenu" class="main-sidebar-list-link" main-ui-sref-toggler="itemMain.stateRef">
+          <i class="{{ ::itemMain.icon }}"></i><span>{{ ::itemMain.title }}</span>
+          <b class="fa fa-angle-down" ui-sref-active="fa-angle-up"
+             ng-if="::itemMain.subMainMenu"></b>
+        </a>
+
+    <!-- Sub Menu -->
+        <ul ng-if="::itemMain.subMainMenu" class="main-sidebar-sublist"
+            ng-class="{'slide-right': item.slideRight}"
+            main-ui-sref-toggling-submenu="itemMain.stateRef">
+          <li ng-repeat="subitemMain in ::itemMain.subMainMenu" ng-class="::{'with-sub-menu': subitemMain.subMainMenu}" ui-sref-active="selected" class="main-sidebar-sublist-item">
+            <a ng-mouseenter="hoverItem($event, itemMain)" ng-if="::subitemMain.subMainMenu" main-ui-sref-toggler="subitemMain.stateRef"
+               class="main-sidebar-list-link subitem-submenu-link"><span>{{ ::subitemMain.title }}</span>
+              <b class="fa" ng-class="{'fa-angle-up': subitem.expanded, 'fa-angle-down': !subitem.expanded}"
+                 ng-if="::subitemMain.subMainMenu"></b>
+            </a>
+            <a ng-mouseenter="hoverItem($event, itemMain)" target="{{::(subitemMain.blank ? '_blank' : '_self')}}" ng-if="::!subitemMain.subMainMenu"
+               ui-state="subitemMain.stateRef || ''"
+               ng-href="{{::(subitemMain.fixedHref ? subitemMain.fixedHref: '')}}">{{ ::subitemMain.title}}</a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  
+
+  <div class="sidebar-hover-elem" ng-style="{top: hoverElemTop + 'px', height: hoverElemHeight + 'px'}"
+       ng-class="{'show-hover-elem': showHoverElem }"></div>
+</div>
+
+<!-- ############################################################################### -->
+<!-- ########################### Small Sidebar ##################################### -->
+<!-- ############################################################################### -->
+
+<div class="small-sidebar" ng-swipe-right="$mainSidebarService.setMenuCollapsed(true)" ng-swipe-left="$mainSidebarService.setMenuCollapsed(false)" ng-mouseleave="hoverElemTop=selectElemTop">
+
+  <a href class="expand-menu-link fa fa-caret-right" main-sidebar-toggle-menu></a>
+
+  <!-- Main Menu -->
+    <ul class="small-sidebar-list">
+
+    <li tooltip-placement="right" uib-tooltip="Home" class="small-sidebar-list-item">
+        <a ng-mouseenter="hoverItem($event, itemMain)" ui-state="itemMain.stateRef || ''" ng-href="{{::(itemMain.fixedHref ? itemMain.fixedHref: '')}}" class="small-sidebar-list-link" id="logo-link">      <h1 id="logo-letter"> T </h1></a>
+    </li>
+
+      <li class="small-sidebar-list-item" ng-repeat="itemProfile in ::profileMenuItems" ng-class="::{'with-sub-menu': itemProfile.subProfileMenu}" ui-sref-active="selected">
+
+        <a tooltip-placement="right" uib-tooltip="{{ ::itemProfile.title }}" ng-mouseenter="hoverItem($event, itemProfile)" ui-state="itemProfile.stateRef || ''" ng-href="{{::(itemProfile.fixedHref ? itemProfile.fixedHref: '')}}" ng-if="::!itemProfile.subProfileMenu" class="small-sidebar-list-link">
+          <img ng-src="{{profile.profilePic}}">
+        </a>
+
+        <a ng-mouseenter="hoverItem($event, itemProfile)" ng-if="::itemProfile.subProfileMenu"
+           class="small-sidebar-list-link" main-ui-sref-toggler="itemProfile.stateRef">
+          <img class="small-profile-menu-pic" ng-src="{{profilePic}}">
+          <b class="fa fa-angle-down" ui-sref-active="fa-angle-up"
+             ng-if="::itemProfile.subProfileMenu"></b>
+        </a>
+
+    <!-- Sub Menu -->
+        <ul ng-if="::itemProfile.subProfileMenu" class="small-sidebar-sublist"
+            ng-class="{'slide-right': itemProfile.slideRight}"
+            main-ui-sref-toggling-submenu="itemProfile.stateRef">
+          <li ng-repeat="subitemProfile in ::itemProfile.subProfileMenu" ng-class="::{'with-sub-menu': subitemProfile.subProfileMenu}" ui-sref-active="selected" class="small-sidebar-sublist-item" tooltip-placement="right" uib-tooltip="{{ ::subitemProfile.title }}">
+            <a ng-mouseenter="hoverItem($event, itemProfile)" ng-if="::subitemProfile.subProfileMenu" main-ui-sref-toggler="subitemProfile.stateRef" class="small-sidebar-list-link subitem-submenu-link">
+              <i class="{{ ::subitemProfile.icon }}"></i>
+              <b class="fa" ng-class="{'fa-angle-up': subitem.expanded, 'fa-angle-down': !subitem.expanded}" ng-if="::subitemProfile.subProfileMenu"></b>
+            </a>
+            <a ng-mouseenter="hoverItem($event, itemProfile)" target="{{::(subitemProfile.blank ? '_blank' : '_self')}}" ng-if="::!subitemProfile.subProfileMenu"
+               ui-state="subitemProfile.stateRef || ''"
+               ng-href="{{::(subitemProfile.fixedHref ? subitemProfile.fixedHref: '')}}"><i class="{{ ::subitemProfile.icon }}"></i></a>
+          </li>
+          <li class="small-sidebar-sublist-item" tooltip-placement="right" uib-tooltip="Log Out">
+            <a ng-mouseenter="hoverItem($event, itemProfile)" ui-state="itemProfile.stateRef || ''" ng-href="{{::(itemProfile.fixedHref ? itemProfile.fixedHref: '')}}" class="small-sidebar-list-link">
+            <i class="fa fa-sign-out"></i></a>
+          </li>
+        </ul>
+      </li>
+      
+      <li popover-placement="right" uib-popover-template="'loggedOut.html'" tooltip-placement="right" uib-tooltip="Profile" class="small-sidebar-list-item">
+        <script type="text/ng-template" id="loggedOut.html">
+          <div class="small-logged-out">  
+            <button type="button" class="btn btn-default" id="sign-up-btn" data-toggle="modal" ng-click="open('app/theme/components/account/signupModal.html', 'md')">Sign Up</button>
+            <button type="button" class="btn btn-default" id="log-in-btn" data-toggle="modal" ng-click="open('app/theme/components/account/loginModal.html', 'md')">Log In</button>
+          </div>  
+          </script>
+          <a ng-mouseenter="hoverItem($event, itemMain)" ui-state="itemMain.stateRef || ''" ng-href="{{::(itemMain.fixedHref ? itemMain.fixedHref: '')}}" class="small-sidebar-list-link">
+          <i class="fa fa-user"></i>
+        </a> 
+      </li>
+
+      <li popover-placement="right" uib-popover-template="'search.html'" tooltip-placement="right" uib-tooltip="Search" class="small-sidebar-list-item">
+        <script type="text/ng-template" id="search.html">
+          <div class="menusearch">
+            <div class="input-group">
+              <input type="text" class="form-control" id="search-input" placeholder="Search" ng-model="searchTerm">
+              <span class="input-group-btn">
+                <button class="btn btn-default" id="search-btn" type="submit" ui-sref="search({query: searchTerm})">
+                  <i class="fa fa-search" id="search-icon"></i>
+                </button>
+              </span>
+            </div><!-- /input-group -->     
+          </div>
+          </script>
+          <a ng-mouseenter="hoverItem($event, itemMain)" ui-state="itemMain.stateRef || ''" ng-href="{{::(itemMain.fixedHref ? itemMain.fixedHref: '')}}" class="small-sidebar-list-link">
+          <i class="fa fa-search" id="search-icon"></i>
+        </a> 
+      </li>
+
+      <li tooltip-placement="right" uib-tooltip="{{ ::itemMain.title }}" ng-repeat="itemMain in ::mainMenuItems" class="small-sidebar-list-item" ui-sref-active="selected">
+        
+        <a ng-mouseenter="hoverItem($event, itemMain)" ui-state="itemMain.stateRef || ''" ng-href="{{::(itemMain.fixedHref ? itemMain.fixedHref: '')}}" class="small-sidebar-list-link">
+          <i class="{{ ::itemMain.icon }}"></i>
+        </a>
+      </li>
+    </ul> 
+
+
+  <div class="sidebar-hover-elem" ng-style="{top: hoverElemTop + 'px', height: hoverElemHeight + 'px'}"
+       ng-class="{'show-hover-elem': showHoverElem }"></div>
+</div>

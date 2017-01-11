@@ -1,0 +1,153 @@
+.modal-dialog{
+  width:500px;
+}
+
+.modal-content{
+  border-radius: 0px;
+}
+
+.modal-body{
+  padding: 0px;
+}
+
+.form{
+  width:90%;
+  margin:20px auto;
+}
+
+.form-horizontal{
+  margin:25px auto;
+}
+
+.social{
+  list-style-type: none;
+  margin-bottom:0px;
+}
+
+.social li{
+  display: inline;
+}
+
+#fb-btn{
+  display: inline;
+  width:42%;
+  border-radius: 0px;
+  margin-left:10px;
+  color: white;
+  background-color: #3b5998;
+}
+
+#tw-btn{
+  display: inline;
+  width:42%;
+  border-radius: 0px;
+  margin-left:10px;
+  color:white;
+  background-color: #55acee;
+}
+
+#username{
+  width:80%;
+  border-radius: 0px;
+  margin-left: 50px;
+}
+
+#email{
+  width:80%;
+  border-radius: 0px;
+  margin-left: 50px;
+}
+
+#password{
+  width:80%;
+  border-radius: 0px;
+  margin-left:50px;
+}
+
+.names{
+  list-style-type: none;
+  margin-bottom:0px;
+}
+
+.names li{
+  display: inline;
+}
+
+#firstname{
+  display: inline;
+  width:42%;
+  border-radius: 0px;
+  margin-left:10px;
+}
+
+#lastname{
+  display: inline;
+  width:42%;
+  border-radius: 0px;
+  margin-left:10px;
+}
+
+.uldob{
+  list-style-type: none;
+}
+
+.uldob li{
+  display: inline;
+}
+
+#doblabel{
+  display: inline;
+  width:42%;
+  border-radius: 0px;
+  margin-left:30px;
+}
+
+#day{
+  display: inline;
+  width:15%;
+  border-radius: 0px;
+  margin-left:15px;
+}
+
+#month{
+  display: inline;
+  width:15%;
+  border-radius: 0px;
+  margin-left:15px;
+}
+
+#year{
+  display: inline;
+  width:20%;
+  border-radius: 0px;
+  margin-left:15px;
+}
+
+#genlabel{
+  display: inline;
+  margin-right: 10px;
+}
+
+.gender{
+  margin-left: 150px;
+}
+
+#terms{
+  margin-left:50px;
+}
+
+#signup-submit{
+  float:right;
+  margin-right: 50px;
+  border-radius: 0px;
+}
+
+#remember{
+  margin-left:50px;
+}
+
+#login-submit{
+  float:right;
+  margin-right: 50px;
+  border-radius: 0px;
+}

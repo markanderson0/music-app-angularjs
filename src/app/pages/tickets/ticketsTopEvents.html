@@ -1,0 +1,11 @@
+<div class="row top-events-label">
+  <div class="col-sm-12">
+		<h2>Top Events</h2>
+	</div>
+</div>
+<div class="top-events">
+	<div class="col-md-3 col-sm-6 col-xs-6 image" ng-repeat="topEvent in tickets.topEvents" ui-sref="tickets.artist({query: topEvent.name})">
+		<img class="event-tile" ng-src="{{topEvent.image}}">
+		<h4 class="event-name"><span>{{topEvent.name}}</span></h4>
+	</div>	
+</div>	

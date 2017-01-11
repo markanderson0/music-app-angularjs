@@ -1,0 +1,60 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <button type="button" class="close" ng-click="$dismiss(); upload.resetValues()" aria-label="Close">
+      <em class="ion-ios-close-empty sn-link-close"></em>
+    </button>
+    <h4 class="modal-title">Edit Video</h4>
+  </div>
+  <div class="modal-body">
+
+    <div id="edit-video-modal">
+      <button class="btn btn-danger" id="delete-video-btn" ng-click="$dismiss(); upload.openConfirmDeleteModal(songs, videoId)">Delete Video</button>
+
+      <div id="video-cue-points">
+        <label> Add video cue points</label>
+        <table class="table table-hover" id="cue-points-table">
+          <thead>
+            <tr>
+              <th ng-class="{ 'invalid-time-header' : upload.noSongSelected}" id="video-song-header">Song</th>
+              <th ng-class="{ 'invalid-time-header' : upload.invalidHour}" id="video-time-header">Hour</th>
+              <th ng-class="{ 'invalid-time-header' : upload.invalidMinute}" id="video-time-header">Minute</th>
+              <th ng-class="{ 'invalid-time-header' : upload.invalidSecond}" id="video-time-header">Second</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td id="video-song">
+                <select ng-class="{ 'invalid-time' : upload.noSongSelected}" class="form-control" name="selectedSong" ng-model="upload.selectedSong" ng-options='song as song for song in songs' ng-change="upload.checkSong()" required></select>
+              </td>
+              <td id="video-time">
+                <input type="number" ng-class="{ 'invalid-time' : upload.invalidHour}" class="form-control" id="hour" placeholder="0" min="0" max="4" name="hour" ng-model="upload.hour" ng-change="upload.checkTime()" required>
+              </td>
+              <td id="video-time">
+                <input type="number" ng-class="{ 'invalid-time' : upload.invalidMinute}" class="form-control" id="minute" placeholder="00" min="0" max="59" name="minute" ng-model="upload.minute" ng-change="upload.checkTime()" required>
+              </td>
+              <td id="video-time">
+                <input type="number" ng-class="{ 'invalid-time' : upload.invalidSecond}" class="form-control" id="second" placeholder="00" min="0" max="59" name="second" ng-model="upload.second" ng-change="upload.checkTime()" required> 
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p ng-show="upload.noSongSelected" class="invalid-time-header">No Song Selected.</p>
+              </td> 
+              <td>
+                <p ng-show="upload.invalidHour" id="invalid-time-footer">Invalid.</p>
+              </td>
+              <td>
+                <p ng-show="upload.invalidMinute" id="invalid-time-footer">Invalid.</p>
+              </td> 
+              <td>
+                <p ng-show="upload.invalidSecond" id="invalid-time-footer">Invalid.</p>
+              </td>     
+            </tr>            
+          </tbody> 
+        </table>  
+      </div> 
+
+      <button ng-show="!upload.invalidHour && !upload.invalidMinute && !upload.invalidSecond" class="btn btn-default" id="submit-video-btn" ng-click="upload.setCuePoints()">Add Cue Point</button>              
+    </div>                  
+  </div>
+</div>

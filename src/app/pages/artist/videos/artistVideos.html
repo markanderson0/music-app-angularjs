@@ -1,0 +1,50 @@
+<div class="row">
+  <div class="col-xs-12">
+    <div class="row row-container banner-container">
+      <img id="artist-banner-pic" ng-src="{{artist.bannerPic}}">    
+      <h3 class="artist-header heading-label" id="title-label" ui-sref="artist.profile({name: artist.artistName})">
+        <span>{{artist.artistName}}</span>
+      </h3>
+    </div>
+  </div>
+</div> 
+
+<div class="row row-container">
+	<v-accordion class="vAccordion--default" multiple>
+	  <v-pane ng-repeat="show in artist.shows" expanded="pane.isExpanded">
+	    <v-pane-header>{{show.date}} | {{show.venue}} | {{show.location}}</v-pane-header>
+	    <v-pane-content>
+	      <div id="profile-videos" ng-repeat="video in show.videos">
+	        <label class="video-title">Uploaded By <a ui-sref="profile.profile.user({user: video.user})">{{video.user}}</a></label>
+	        <slick infinite="false" slides-to-show="5" slides-to-scroll="1" responsive="artist.responsive" arrows="true">
+	          <div ng-repeat="vid in video.video track by $index">
+	            <div class="video-tile">
+	              <img class="video-pic" ng-src="{{vid.image}}">
+	              <span ui-sref="video({name: artist.artistName, playlist: video.playlistId, show: show.id, id: vid.id})">
+	              	<h5 ng-repeat="song in vid.songs track by $index">{{song}}</h5>
+	              </span>
+	            </div>
+	            <h5 class="video-rating">
+	              <span>
+	                <i class="fa fa-volume-off" aria-hidden="true"></i>{{vid.audio}} 
+	                <i class="fa fa-video-camera" aria-hidden="true"></i>{{vid.video}}
+	              </span>
+	            </h5>
+	            <h5 class="video-time">
+	            	<span>{{vid.time}}</span>
+	            </h5>
+	            <h5 class="video-views">
+	              <span>{{ vid.views}}<i class="fa fa-eye" aria-hidden="true"></i></span>
+	            </h5>
+	            <h5 class="video-songs">
+	            	<a title="{{vid.songsString}}" ui-sref="video({name: artist.artistName, playlist: video.playlistId, show: show.id, id: vid.id})">{{vid.songsString}}</a>
+	            </h5>
+	          </div>
+	        </slick>
+	      </div>
+	    </v-pane-content>
+	  </v-pane>
+	</v-accordion>
+</div>	
+
+<uib-pagination total-items="artist.totalItems" ng-model="artist.currentPage" max-size="artist.maxSize" items-per-page="artist.itemsPerPage" class="pagination-md artist-shows-pagination" ng-change="artist.pageChange(artist.currentPage)" boundary-links="true" rotate="false"></uib-pagination>

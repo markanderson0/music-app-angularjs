@@ -1,0 +1,37 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <button type="button" class="close" ng-click="$dismiss()" aria-label="Close">
+      <em class="ion-ios-close-empty sn-link-close"></em>
+    </button>
+    <h4 class="modal-title">Confirm Video Details</h4>
+  </div>
+  <div class="modal-body">               
+      <form class="form-horizontal" role="form" role="form" name="uploadModalForm" ng-submit="upload.submitVideoModal()" novalidate>
+        
+        <div class="form-group" id="upload-details">
+          <label>Video: </label><h5 ng-model="file"><b>{{file.name}}</b></h5><hr>
+          <label>Artist: </label><h5 ng-model="artist"><b>{{artist}}</b></h5><hr>
+          <label>Year: </label><h5 ng-model="eventYear"><b>{{eventYear}}</b></h5><hr>
+          <label>Show: </label><h5 ng-model="selectedEvent"><b>{{selectedEvent}}</b></h5><hr>
+          <label>Songs: </label><h5 ng-model="selected"><b>{{selected}}</b></h5><hr>
+        </div>
+
+
+        <!-- TERMS AND CONDITIONS -->
+        <div class="form-group" ng-class="{ 'has-error' : uploadModalForm.terms.$invalid && upload.videoModalSubmitted}">
+          <div class="checkbox" id="terms">
+            <label>
+              <input type="checkbox" name="terms" ng-model="upload.terms" required> Terms and Conditions
+            </label>
+          </div>
+          <div ng-show="upload.videoModalSubmitted">
+            <p ng-show="uploadModalForm.terms.$pristine" class="help-block" id="form-modal">You must agree to the Terms and Conditions to continue.</p>
+          </div> 
+        </div>
+
+        <div class="form-group" >
+          <button type="submit" class="btn btn-default btn-with-icon" id="upload-submit"><i class="fa fa-upload"></i>Upload Video</button>
+        </div>
+      </form>                
+  </div>
+</div>

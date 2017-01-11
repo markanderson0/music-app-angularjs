@@ -1,0 +1,241 @@
+@mixin small-sidebar(){
+
+  .tooltip-inner{
+    border-radius: 0px;
+    white-space: nowrap;
+  }
+
+  .popover{
+    border-radius: 0px;
+  }
+
+  .main-sidebar {
+    display:none;
+  }
+    .sidebar-hover-elem, .sidebar-select-elem {
+      left: 48px;
+    }
+
+  .small-sidebar {
+    width: 50px;
+    left: 0;
+    z-index: 904;
+    display: block;
+    min-height: 100%;
+    @include bg-translucent-dark(0.7);
+    height: 100%;
+    position: fixed;
+  }
+  
+  #logo-letter{
+   padding-top: 10px;
+   margin-left: -5px
+  }
+
+  #logo-link{
+    height: 60px;
+    border-bottom: solid 1px white;
+  }
+  
+  .logged-in-pic{
+    width: 20px;
+    height: 20px;
+  }
+
+  #logged-in-link{
+    padding-left: 15px;
+  }
+
+  .small-logged-in{
+    width: 150px;
+  }
+
+  .small-logged-out{
+    width: 180px;
+  }
+
+  .menusearch{
+    width: 200px;
+  }
+
+  .small-sidebar-list {
+    margin: 0;
+    padding: 0px 0 0 0;
+    list-style: none;
+  }
+
+  .small-profile-menu-pic{
+    height: 60%;
+    margin-left: -8px;
+  } 
+
+  .small-sidebar-sublist .subitem-submenu-list {
+    padding-left: 15px;
+  }
+
+  .subitem-submenu-link {
+    .fa {
+      top: 7px;
+    }
+  }
+
+  .small-sidebar-list-item {
+    display: block;
+    position: relative;
+    float: none;
+    padding: 0;
+    &.selected:not(.with-sub-menu) {
+      background-color: black;
+      a.small-sidebar-list-link {
+        color: $default;
+        b {
+          color: $default;
+        }
+      }
+    }
+  }
+
+  .small-sidebar-list-item, .small-sidebar-sublist-item {
+    &.main-sidebar-item-expanded {
+      > .small-sidebar-list-link {
+        b {
+          transform: rotate(180deg);
+        }
+      }
+
+      > .small-sidebar-sublist {
+        display: block;
+      }
+    }
+  }
+
+  a.small-sidebar-list-link {
+    display: block;
+    height: 42px;
+    padding-left: 20px;
+    text-shadow: none;
+    font-size: 13px;
+    text-decoration: none;
+    color: #ffffff;
+    line-height: 42px;
+    white-space: nowrap;
+    overflow: hidden;
+    cursor: pointer;
+    &:hover {
+      color: black;
+      background-color: silver;
+      b {
+        color: black;
+      }
+    }
+    i {
+      margin-right: 18px;
+      width: 16px;
+      display: inline-block;
+    }
+    b {
+      display: block;
+      opacity: 1;
+      width: 10px;
+      height: 15px;
+      line-height: 14px;
+      text-shadow: none;
+      font-size: 13px;
+      position: absolute;
+      left: 38px;
+      top: 15px;
+      padding: 0;
+      text-align: center;
+      color: #cccccc;
+      transition: transform 0.2s linear;
+    }
+  }
+
+  .small-sidebar-sublist {
+    padding: 0;
+    list-style: none;
+    position: relative;
+    display: none;
+    background-color:silver;
+    &.expanded {
+      display: block;
+    }
+    > li {
+      display: block;
+      float: none;
+      padding: 0;
+      border-bottom: none;
+      position: relative;
+      a {
+        display: block;
+        text-shadow: none;
+        font-size: 13px;
+        text-decoration: none;
+        color: #ffffff;
+        padding-left: 20px;
+        height: auto;
+        line-height: 29px;
+        &:hover {
+          color: black;
+        }
+      }
+      &.selected:not(.with-sub-menu) > a {
+        border: none;
+        background-color: black;
+        &:hover {
+          color: black;
+        }
+      }
+
+    }
+  }
+}
+
+@mixin layout-collapsed() {
+  .main {
+    margin-left: 30px;
+  }
+}
+
+@mixin expand-arrow(){
+  a.expand-menu-link {
+    font-size: 20px;
+    cursor: pointer;
+    display: block;
+    text-decoration: none;
+    line-height: 42px;
+    color: black;
+    padding: 0;
+    float: left;
+    position: fixed;
+    left: 55px;
+      &:hover {
+        text-decoration: none;
+        color: $warning;
+      }
+  }
+}
+
+@mixin no-arrow(){
+  a.expand-menu-link{
+    display: none;
+  }
+}
+.menu-collapsed{
+  @include small-sidebar();
+  @include layout-collapsed();
+  @include expand-arrow();
+}
+@media (max-width: 1200px) {
+  .menu-collapsed{
+    @include small-sidebar();
+    @include layout-collapsed();
+  }
+}
+@media (max-width: 900px){
+  .menu-collapsed{
+    @include small-sidebar();
+    @include layout-collapsed();
+    @include no-arrow();
+  }
+}
