@@ -3,7 +3,7 @@ Music App - AngularJS
 
 AngularJS version of the music app.
 
-This appliation allows users to find various details about artists such as:
+This application allows users to find various details about artists such as:
 
  - if they have any tickets available
  - what merch they have on sale
@@ -23,8 +23,8 @@ Browse
 Tickets
 -
 - Find tickets from the most popular artists currently on tour on the home tickets screen.
-- Search for tickets of a particular genre by clicking one of the genre buttons or enter an artists name into the search bar to find tickets for a specfic artist.
-- Tickets for an artist can be viewed as a list or on a map provided via GooleMaps.
+- Search for tickets of a particular genre by clicking one of the genre buttons or enter an artists name into the search bar to find tickets for a specific artist.
+- Tickets for an artist can be viewed as a list or on a map provided via Google Maps.
 
 **Note**: Data for the top tickets is scraped from the TicketCity website via ImportIO and all other ticket data is loaded from the TicketMaster API.
 
@@ -48,15 +48,14 @@ Artist Profile
 -
 - This is a feature page for an individual artist.
 - View the artists most popular videos.
-- View a small preview of what tickets and merch the artist has available. By clicking the more tickets/merch link under each respective section a search for tickets/merch will be condicted using the artists name.
+- View a small preview of what tickets and merch the artist has available. By clicking the more tickets/merch link under each respective section a search for tickets/merch will be conducted using the artists name.
 - A small preview of the artists previous shows and released albums is also shown with links to full pages regarding each section available.
 
-**Note**: All data for top videos is stored locally. Tickets data is loaded via the TicketMaster API. Merch data is loaded via the Ebay API. Previous shows data is loaded via the setlist.fm API.
-Albums data is loaded via the Spotify API.
+**Note**: All data for top videos is stored locally. Tickets data is loaded via the TicketMaster API. Merch data is loaded via the EBay API. Previous shows data is loaded via the setlist.fm API. Albums data is loaded via the Spotify API.
 
 Artist Videos
 -
-- Videos for an artist that have been upload by users can be found sorted by the data of the show then by the users that uploaded the videos for each playlist.
+- Videos for an artist that have been upload by users can be found sorted by the date of the show then by the users that uploaded the videos for each playlist.
 
 **Note**: Data for videos is stored locally.
 
@@ -96,7 +95,7 @@ Upload
   4. Select the particular show from which their video was recorded from the shows drop down list.
   5. Select the songs that the artist played in the video from the songs drop down list.
   6. Press the upload button to review the details for the upload and click the terms and conditions check box to upload the video.
-- Once the artist name and show year have been entered and api call is made to get the list of shows, then once a show is selected, another api call is made to get the songs played during that show.
+- Once the artist name and show year have been entered an api call is made to get the list of shows, then once a show is selected, another api call is made to get the songs played during that show.
 - On the My Uploads tab a user can view the videos that they have previously uploaded and select to delete the video or add time cue points to each song in the video to allow users to skip to the specific point in the video that the particular song starts.
 
 **Note**: All data for by My Uploads is stored locally. The delete video and cue points arent currently functional and are only for show. Data for uploading a video is loaded from the setlist.fm API.
